@@ -1,0 +1,46 @@
+* {
+  box-sizing: border-box;
+}
+*, *:before, *:after {
+  box-sizing: inherit;
+}
+body {
+  margin: 0;
+  padding: 0;
+  font-family: Roboto, Arial, sans-serif;
+}
+li {
+  list-style: none;
+}
+a {
+  color: #000;
+  text-decoration: none;
+}
+
+/*
+#energy-balance-logo {
+  height: auto;
+  width: 100%;
+}
+*/
+
+#energy-balance-logo img {
+  max-width: 100%;
+  max-height: 100%;
+  margin: auto;
+  display: block;
+}   
+
+/*
+#energy-balance-intro {
+  height: auto;
+  width: 100%;
+}
+
+#energy-balance-intro p {
+  max-width: 100%;
+  max-height: 100%;
+  margin: auto;
+  display: block;
+}
+*/
