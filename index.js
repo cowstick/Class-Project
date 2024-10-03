@@ -1,4 +1,4 @@
-Hey Jacob /*  Abbreviations Used:
+/*  Abbreviations Used:
     BMR   Basal Metabolic Rate                    PAL   Physical Activity Level
     TDEE  Total Daily Energy Expenditure          TDCI  Total Daily Caloric Intake
     DEBD  Daily Energy Balance Delta
