@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="author" content="Bill Burns">
+    <meta name="description" content="personal energy balance log and calculator">
+    <meta name="keywords" content="energy, balance, BMR, PAL, TDEE">
+    <title>My Energy Balance</title>
+    
+    <!--  Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;0,900;1,400;1,500&display=swap" rel="stylesheet">
+
+    <!-- jQuery Library, jQuery Mobile (jQM) Library, jQuery Mobile (jQM) CSS -->
+    <link rel="stylesheet" href="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.css" />
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="https://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js"></script>
+    
+    <!-- provides an input spinner control -->
+    <script type="text/javascript" src="http://dev.jtsage.com/cdn/spinbox/latest/jqm-spinbox.min.js"></script>
+    
+    <!-- local JavaScript -->
+    <script src="index.js"></script>
+    
+    <!-- local CSS -->
+    <link rel="stylesheet" type="text/css" href="index.css">
+    
+    <!--  Abbreviations Used:
+          bmr   Basal Metabolic Rate              pal   Physical Activity Level
+          tdee  Total Daily Energy Expenditure    tdci  Total Daily Caloric Intake
+          debd  Daily Energy Balance Delta
+    -->
+    
+</head>
+  <body>
+    <!-- "Home Page" page ************************************************************************* START -->
+    <div data-role="page" id="home-page">
+      <!-- header ----------------------------------------------------------------------- START -->
+      <div data-role="header">
+        <h1>My Energy Balance</h1>
+        <!-- navbar ----------------------------------------------------------- START -->
+        <div data-role="navbar">
+          <ul>
+            <li><a href="#home-page">Home Page</a></li>
+            <li><a href="#add-entry">Add Log Entry</a></li>
+            <li><a href="#display-log" class="display-log-link">Display Log</a></li>
+          </ul>
+        </div>
+        <!-- navbar ----------------------------------------------------------- END -->
+      </div>
+      <!-- header ----------------------------------------------------------------------- END -->
+
+      <!-- content ---------------------------------------------------------------------- START -->
+      <div data-role="content">
+        <!-- 2 column grid ---------------------------------------------------- START -->    
+        <div class="ui-grid-a">
+          <!-- block A (column 1/row 1)  ---------------------------- START -->    
+          <div class="ui-block-a" id="energy-balance-logo"> 
+            <div class="ui-bar ui-bar-a">
+              <img src="images/energy-balance-logo.png" alt="logo for My Energy Balance app">
+            </div> 
+          </div>
+          <!-- block A (column 1/row 1)  ---------------------------- END -->
+          
+          <!-- block B (column 2/row 1)  ---------------------------- START -->
+          <div class="ui-block-b" id="energy-balance-intro">
+            <div class="ui-bar ui-bar-a">
+              <p>
+                My Energy Balance is your personal daily energy balance tracker.<br><br>
+                Basal Metabolic Rate (BMR)<br> 
+                Amount of energy body uses for daily essential functions while at rest.<br><br>
+                Physical Activity Level (PAL)<br>
+                A way to quantify daily physical activity. Is used to estimate total daily energy expenditure (TDEE).<br><br>
+                Total daily energy expenditure (TDEE)<br>
+                Estimates the number calories the body burns daily. A method of estimating TDEE is ...<br>
+                TDEE = BMR x PAL<br><br>
+                Total Daily Caloric Intake (TDCI)<br><br>
+                Daily Energy Balance Delta (DEBD)<br>
+                DEBD = TDCI – TDEE
+              </p> 
+            </div>
+          </div>
+          <!-- block B (column 2/row 1)  ---------------------------- END -->
+        </div> 
+        <!-- 2 column grid ---------------------------------------------------- END -->    
+      </div>
+      <!-- content ---------------------------------------------------------------------- END -->
+
+      <!-- footer ----------------------------------------------------------------------- START -->
+      <div data-role="footer">
+        <h1>Copyright 2024 by Bill Burns</h1>
+      </div>
+      <!-- footer ----------------------------------------------------------------------- END -->
+    </div>
+    <!-- "Home Page" page ************************************************************************* END -->
+
+
+    <!-- "Display Specified Log Entry" page ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ START -->
+    <div data-role="page" id="display-entry">
+      <!-- header ----------------------------------------------------------------------- START -->
+      <div data-role="header">
+        <h1>Log Entry Details</h1>
+        <!-- navbar ----------------------------------------------------------- START -->
+        <div data-role="navbar">
+          <ul>
+            <li><a href="#home-page">Home Page</a></li>
+            <li><a href="#add-entry">Add Log Entry</a></li>
+            <li><a href="#display-log" class="display-log-link">Display Log</a></li>
+          </ul>
+        </div>
+        <!-- navbar ----------------------------------------------------------- END -->
+      </div>
+      <!-- header ----------------------------------------------------------------------- END -->
+
+      <!-- content ---------------------------------------------------------------------- START -->
+      <div data-role="content">
+      
+          <h2>You have arrived on the Log Entry Details page</h2>
+          
+        <!-- "FOOD & ACTIVITY" grid; 5 column x 2 row ------------------------- START -->
+        <div class="ui-grid-d"> 
+          <!-- ROW 1 - column headers ------------------------------- START -->
+          <!-- date of log entry [A] (col1|row1) --------------- START -->    
+          <div class="ui-block-a"> 
+            <div class="ui-bar ui-bar-a">
+              <h2>Entry Date</h2>
+            </div> 
+          </div>        
+          <!-- date of log entry [A] (col1|row1) --------------- END -->    
+
+          <!-- calories from protein [B] (col2|row1) ----------- START -->    
+          <div class="ui-block-b"> 
+            <div class="ui-bar ui-bar-a">
+              <h2>Protein Calories</h2>
+            </div> 
+          </div>        
+          <!-- calories from protein [B] (col2|row1) ----------- END -->    
+
+          <!-- calories from carbs [C] (col3|row1) ------------- START -->    
+          <div class="ui-block-c"> 
+            <div class="ui-bar ui-bar-a">
+              <h2>Carb Calories</h2>
+            </div> 
+          </div>        
+          <!-- calories from carbs [C] (col3|row1) ------------- END -->    
+
+          <!-- calories from fat [D] (col4|row1) --------------- START -->    
+          <div class="ui-block-d"> 
+            <div class="ui-bar ui-bar-a">
+              <h2>Fat Calories</h2>
+            </div> 
+          </div>        
+          <!-- calories from fat [D] (col4|row1) --------------- END -->    
+
+          <!-- PAL value [E] (col5|row1) ----------------------- START -->    
+          <div class="ui-block-e"> 
+            <div class="ui-bar ui-bar-a">
+              <h2>PAL</h2>
+            </div> 
+          </div>        
+          <!-- PAL value [E] (col5|row1) ----------------------- END -->    
+          <!-- ROW 1 - column headers ------------------------------- END -->
+
+          <!-- ROW 2 - column values -------------------------------- START -->
+          <!-- date of log entry [A] (col1|row2) --------------- START -->    
+          <div class="ui-block-a"> 
+            <div class="ui-bar ui-bar-a">
+              <pre id="entry-date-displayed"></pre>
+            </div> 
+          </div>        
+          <!-- date of log entry [A] (col1|row2) --------------- END -->    
+
+          <!-- calories from protein [B] (col2|row2) ----------- START -->    
+          <div class="ui-block-b"> 
+            <div class="ui-bar ui-bar-a">
+              <pre id="protein-calories-displayed"></pre>
+            </div> 
+          </div>        
+          <!-- calories from protein [B] (col2|row2) ----------- END -->    
+
+          <!-- calories from carbs [C] (col3|row2) ------------- START -->    
+          <div class="ui-block-c"> 
+            <div class="ui-bar ui-bar-a">
+              <pre id="carbo-calories-displayed"></pre>
+            </div> 
+          </div>        
+          <!-- calories from carbs [C] (col3|row2) ------------- END -->    
+
+          <!-- calories from fat [D] (col4|row2) --------------- START -->    
+          <div class="ui-block-d"> 
+            <div class="ui-bar ui-bar-a">
+              <pre id="fat-calories-displayed"></pre>
+            </div> 
+          </div>        
+          <!-- calories from fat [D] (col4|row2) --------------- END -->    
+
+          <!-- PAL value [E] (col5|row2) ----------------------- START -->    
+          <div class="ui-block-e"> 
+            <div class="ui-bar ui-bar-a">
+              <pre id="pal-displayed"></pre>
+            </div> 
+          </div>        
+          <!-- PAL value [E] (col5|row2) ----------------------- END -->    
+          <!-- ROW 2 - column values -------------------------------- END -->
+        </div>
+        <!-- "FOOD & ACTIVITY" grid; 5 column x 2 row ------------------------- END -->
+        <!--        
+        Use copy of "FOOD & ACTIVITY" grid to make "ENERGY BALANCE" & "MY PROFILE" grids
+        -->
+      </div>
+      <!-- content ---------------------------------------------------------------------- END -->
+
+      <!-- footer ----------------------------------------------------------------------- START -->
+      <div data-role="footer">
+        <h1>Copyright 2024 by Bill Burns</h1>
+      </div>
+      <!-- footer ----------------------------------------------------------------------- END -->
+    </div>
+    <!-- "Display Specified Log Entry" page ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ END -->
+
+
+    <!-- "Log Entry" page ######################################################################### START -->
+    <div data-role="page" id="add-entry">
+      <!-- header ----------------------------------------------------------------------- START -->
+      <div data-role="header">
+        <h1>Log Entry</h1>
+        <!-- navbar ----------------------------------------------------------- START -->
+        <div data-role="navbar">
+          <ul>
+            <li><a href="#home-page">Home Page</a></li>
+            <li><a href="#add-entry">Add Log Entry</a></li>
+            <li><a href="#display-log" class="display-log-link">Display Log</a></li>
+          </ul>
+        </div>
+        <!-- navbar ----------------------------------------------------------- END -->
+      </div>
+      <!-- header ----------------------------------------------------------------------- END -->
+
+      <!-- content ---------------------------------------------------------------------- START -->    
+      <div data-role="content">
+      
+        <!-- retrieve user input data using 3 column X 4 row grid ------------- START -->    
+        <div class="ui-grid-b">
+        
+          <!-- select log entry date-block A (column 1/row 1) -------- START -->    
+          <div class="ui-block-a"> 
+            <div class="ui-bar ui-bar-a">
+              <label for="selected-entry-date">Log Entry Date:</label>
+              <input type="date" name="selected-entry-date" id="selected-entry-date" value="" />
+            </div> 
+          </div>        
+          <!-- enter log entry date-block A (column 1/row 1) --------- END -->    
+
+          <!-- select PAL-block B (column 2/row 1) ------------------- START -->    
+          <div class="ui-block-b">
+            <div class="ui-field-contain ui-bar ui-bar-a">
+              <label for="selected-pal">Physical Activity Level (PAL):</label>
+              <select name="selected-pal" id="selected-pal">
+                <option disabled selected value>Select Today's PAL</option>
+                <option value=1.5>Sedentary with no exercise</option>
+                <option value=1.8>Sedentary with little exercise</option>
+                <option value=2.0>Moderately Active</option>
+                <option value=2.2>Vigorously Active</option>
+                <option value=2.5>Extremely Active</option>
+              </select>
+            </div>
+          </div>
+          <!-- select PAL-block B (column 2/row 1)  ------------------ END -->    
+          
+          <!-- "add new entry" button-block C (column 3/row 1) ------- START -->
+          <div class="ui-block-c">
+            <div class="ui-bar ui-bar-a">
+              <div class="ui-field-contain">
+                <h2>Click the button below to save this log entry</h2>
+                <input type="button" value="Save Log Entry" id="save-entry"/>
+              </div>
+            </div>
+          </div>
+          <!-- "add new entry" button-block C (column 3/row 1) ------- END -->
+
+          <!-- enter protein calories-block A (column 1/row 2) ------- START -->    
+          <div class="ui-block-a"> 
+            <div class="ui-bar ui-bar-a">
+              <div class="ui-field-contain">
+                <label for="entered-protein-calories">Enter: Calories from Protein</label>
+                <input type="text" data-role="spinbox" data-mini="false" name="entered-protein-calories" id="entered-protein-calories" value="780" min="360" max="1200" />
+              </div>   
+            </div> 
+          </div>
+          <!-- enter protein calories-block A (column 1/row 2) ------- END -->    
+          
+          <!-- enter carb calories-block B (column 2/row 2) ---------- START -->    
+          <div class="ui-block-b"> 
+            <div class="ui-bar ui-bar-a">
+              <div class="ui-field-contain">
+                <label for="entered-carbo-calories">Enter: Calories from Carbohydrates</label>
+                <input type="text" data-role="spinbox" data-mini="false" name="entered-carbo-calories" id="entered-carbo-calories" value="1040" min="480" max="1600" />
+              </div>   
+            </div> 
+          </div>
+          <!-- enter carb calories-block B (column 2/row 2) ---------- END -->    
+          
+          <!-- enter fat calories-block C (column 3/row 2) ----------- START -->    
+          <div class="ui-block-c"> 
+            <div class="ui-bar ui-bar-a">
+              <div class="ui-field-contain">
+                <label for="entered-fat-calories">Enter: Calories from Fat</label>
+                <input type="text" data-role="spinbox" data-mini="false" name="entered-fat-calories" id="entered-fat-calories" value="780" min="360" max="1200" />
+              </div>   
+            </div> 
+          </div>
+          <!-- enter fat calories-block C (column 3/row 2) ----------- END -->    
+
+          <!-- select gender-block A (column 1/row 3) ---------------- START -->    
+          <div class="ui-block-a">
+            <div class="ui-field-contain ui-bar ui-bar-a">
+              <label for="selected-gender">Gender:</label>
+              <select name="selected-gender" id="selected-gender">
+                <option disabled selected value>Select an Option</option>
+                <option value="woman">woman</option>
+                <option value="man">man</option>
+                <option value="not-respond">prefer not to respond</option>
+              </select>
+            </div>
+          </div>
+          <!-- select gender-block A (column 1/row 3) ---------------- END -->    
+          
+          <!-- block B (column 2/row 3)- not being used -------------- START -->
+          <div class="ui-block-b">
+            <div class="ui-bar ui-bar-a">
+            </div>
+          </div>
+          <!-- block B (column 2/row 3)- not being used -------------- END -->
+                <!--      <pre id="grid-cell-output">contents of grid cell col 2 | row 3</pre> -->
+
+          <!-- block C (column 3/row 3)-not being used --------------- START -->
+          <div class="ui-block-c">
+            <div class="ui-bar ui-bar-a">
+            </div>
+          </div>
+          <!-- block C (column 3/row 3)-not being used --------------- END -->
+          
+          <!-- enter age-block A (column 1/row 4) ------------------- START -->
+          <div class="ui-block-a"> 
+            <div class="ui-bar ui-bar-a">
+              <div class="ui-field-contain">
+                <label for="entered-age">Enter: Age (yrs)</label>
+                <input type="text" data-role="spinbox" data-mini="false" name="entered-age" id="entered-age" value="40" min="1" max="150" />
+              </div>   
+            </div> 
+          </div>
+          <!-- select age-block A (column 1/row 4) ------------------- END -->
+
+          <!-- select height-block B (column 2/row 4) ---------------- START -->
+          <div class="ui-block-b"> 
+            <div class="ui-bar ui-bar-a">
+              <div class="ui-field-contain">
+                <label for="entered-height">Enter: Height (in)</label>
+                <input type="text" data-role="spinbox" data-mini="false" name="entered-height" id="entered-height" value="65" min="58" max="84" />
+              </div>   
+            </div> 
+          </div>
+          <!-- select height-block B (column 2/row 4) ---------------- END -->
+
+          <!-- select weight-block C (column 3/row 4) ---------------- START -->
+          <div class="ui-block-c"> 
+            <div class="ui-bar ui-bar-a">
+              <div class="ui-field-contain">
+                <label for="entered-weight">Enter: Weight (lbs)</label>
+                <input type="text" data-role="spinbox" data-mini="false" name="entered-weight" id="entered-weight" value="150" min="90" max="300" />
+              </div>   
+            </div> 
+          </div>
+          <!-- select weight-block C (column 3/row 4) ---------------- END -->
+          
+        </div>
+        <!-- retrieve user input data using 3 column X 4 row grid ------------- END -->    
+
+      </div>
+      <!-- content ---------------------------------------------------------------------- END -->      
+
+      <!-- footer ----------------------------------------------------------------------- START -->    
+      <div data-role="footer">
+        <h1>Copyright 2024 by Bill Burns</h1>
+      </div>
+      <!-- footer ----------------------------------------------------------------------- END -->    
+    </div>
+    <!-- "Log Entry" page ######################################################################### END -->
+
+    
+    <!-- "Display Log" page %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% START -->
+    <div data-role="page" id="display-log">
+      <!-- header ----------------------------------------------------------------------- START -->
+      <div data-role="header">
+        <h1>Your Log Entries</h1>
+          <!-- navbar --------------------------------------------------------- START -->
+        <div data-role="navbar">
+          <ul>
+            <li><a href="#home-page">Home Page</a></li>
+            <li><a href="#add-entry">Add Log Entry</a></li>
+            <li><a href="#display-log" class="display-log-link">Display Log</a></li>
+          </ul>
+        </div>
+          <!-- navbar --------------------------------------------------------- END -->
+    </div>
+      <!-- header ----------------------------------------------------------------------- END -->
+
+      <!-- content ---------------------------------------------------------------------- START -->
+      <div data-role="content" id="display-log-content">
+        <!-- the static container for the dynamic grid ------------------------ START -->
+        <div id="log-grid"></div>
+        <!-- the static container for the dynamic grid ------------------------ END -->
+        <!-- display log contents using 4 column X 1 row grid ----------------- START -->   
+        <!-- <div class="ui-grid-c"> -->
+          <!-- Info row ------------------------------------------------- START -->
+          <!-- "info on specific log entry" [A] (col1|row1) -->    
+          <!-- <div class="ui-block-a"> 
+              <div class="ui-bar ui-bar-a">
+                <p>
+                  For more information on a specific log entry, click the log entry’s date
+                </p> 
+              </div> 
+            </div>
+          -->
+          <!-- full name for TDEE, TDCI, DEBD [B] (col2|row1) -->   
+          <!-- <div class="ui-block-b"> 
+            <div class="ui-bar ui-bar-a">
+              <p>
+                TDEE<br>Total daily energy expenditure<br><br>TDCI<br>Total Daily Caloric Intake<br><br>DEBD<br>Daily Energy Balance Delta<br>
+              </p> 
+            </div> 
+          </div>
+          -->        
+          <!-- positive DEBD [C] (col3|row1) --> 
+          <!-- <div class="ui-block-c"> 
+            <div class="ui-bar ui-bar-a">
+              <p>
+                Positive DEBD<br>A positive DEBD number indicates more calories were consumed than were expended on the associated entry date.<br>Excess/unused calories may be stored as fat.<br>
+              </p>
+            </div> 
+          </div>
+          -->   
+          <!-- negative DEBD [D] (col4|row1) -->  
+          <!-- <div class="ui-block-d"> 
+            <div cl ass="ui-bar ui-bar-a">
+              <p>
+                Negative DEBD<br>A negative DEBD number indicates more calories were expended than were consumed on the associated entry date.<br>Calories stored as fat maybe burned to compensate for energy debt.<br>
+              </p>
+            </div> 
+          </div>
+          -->
+          <!-- Info row  ------------------------------------------------- END -->  
+        <!-- </div> -->
+        <!-- display log contents using 4 column X 1 row grid ----------------- END -->     
+      </div>
+      <!-- content ---------------------------------------------------------------------- END -->
+
+      <!-- footer ----------------------------------------------------------------------- START -->   
+      <div data-role="footer">
+        <h1>Copyright 2024 by Bill Burns</h1>
+      </div>
+      <!-- footer ----------------------------------------------------------------------- END -->    
+    </div>
+    <!-- "Display Log" page %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% END -->
+  </body>
+</html>
